@@ -87,5 +87,66 @@ namespace MusicPlayer
             return returnThese;
 
         }
+
+        internal int addOneAlbum(Albums albums)
+        {
+            
+            //Mysql connection 
+            MySqlConnection connecton = new MySqlConnection(connectionstring);
+            connecton.Open();
+
+            //sql statement 
+            MySqlCommand command = new MySqlCommand("INSERT INTO `albums`(`Albums`, `ArtistName`, `Year`, `ImageURL`, `Description`) VALUES (@albumname,@artist,@year,@imageurl,@description)", connecton);
+            command.Parameters.AddWithValue("@albumname", albums.AlbumsName);
+            command.Parameters.AddWithValue("@artist", albums.ArtistName);
+            command.Parameters.AddWithValue("@year", albums.Year);
+            command.Parameters.AddWithValue("@imageURL", albums.ImageURL);
+            command.Parameters.AddWithValue("@description", albums.Description);
+
+            int newRows = command.ExecuteNonQuery();
+            
+            connecton.Close();
+
+            return newRows;
+        }
+        public List<Track> getTrackForAlbum(int albumID)
+        {
+            //empty list 
+            List<Track> returnThese = new List<Track>();
+
+            //Mysql connection 
+            MySqlConnection connecton = new MySqlConnection(connectionstring);
+            connecton.Open();
+
+            //sql statement 
+            MySqlCommand command = new MySqlCommand();
+            command.CommandText="SELECT * FROM TRACKS WHERE albums_ID = @albumid";
+            command.Parameters.AddWithValue("@albumid", albumID);
+            command.Connection = connecton;
+            using (MySqlDataReader reader = command.ExecuteReader())
+            {
+                while (reader.Read())
+                {
+                    Track t = new Track
+                    {
+                        ID = reader.GetInt32(0),
+                        Name = reader.GetString(1),
+                        Number = reader.GetInt32(2),
+                        VideoURL = reader.GetString(3),
+                        Lyrics = reader.GetString(4),
+                        
+
+                    };
+                    returnThese.Add(t);
+
+                }
+            }
+
+            connecton.Close();
+
+            return returnThese;
+
+        }
     }
+
 }

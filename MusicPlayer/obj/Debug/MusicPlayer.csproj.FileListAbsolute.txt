@@ -40,3 +40,4 @@ C:\Users\Admin\source\repos\MusicPlayer\MusicPlayer\bin\Debug\System.Numerics.Ve
 C:\Users\Admin\source\repos\MusicPlayer\MusicPlayer\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\Admin\source\repos\MusicPlayer\MusicPlayer\bin\Debug\System.Threading.Tasks.Extensions.xml
 C:\Users\Admin\source\repos\MusicPlayer\MusicPlayer\obj\Debug\MusicPla.163160C2.Up2Date
+C:\Users\Admin\source\repos\MusicPlayer\MusicPlayer\obj\Debug\MusicPlayer.AddAlbums.resources
